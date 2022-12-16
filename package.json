@@ -1,0 +1,49 @@
+{
+  "name": "alx-udacity-project1-image-processing",
+  "version": "1.0.0",
+  "description": "An Image processing API based on express server to perform basic image processing like resizing images. In fulfillment of Project 1 of the ALX Udacity Fullstack javascript programme",
+  "main": "index.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "lint": "eslint . --ext .js --fix",
+    "prettier": "prettier --config ./.prettierrc --write ./*.js",
+    "start": "nodemon src/index.ts",
+    "start-prod": "nodemon build/index",
+    "test": "npm run build && npm run jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opmat/ALX-Udacity-Project1-Image-Processing.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "image",
+    "processing"
+  ],
+  "author": "Opeyemi Emmanuel MATILUKO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/opmat/ALX-Udacity-Project1-Image-Processing/issues"
+  },
+  "homepage": "https://github.com/opmat/ALX-Udacity-Project1-Image-Processing#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/jasmine": "^4.3.1",
+    "@types/node": "^18.11.16",
+    "eslint": "^8.29.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
