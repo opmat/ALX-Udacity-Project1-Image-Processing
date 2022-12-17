@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "npx tsc",
+    "jasmine": "jasmine",
     "lint": "eslint . --ext .js --fix",
     "prettier": "prettier --config ./.prettierrc --write ./*.js",
     "start": "nodemon src/index.ts",

@@ -1,0 +1,4 @@
+# Ignore artifacts:
+build
+spec
+src/tests
