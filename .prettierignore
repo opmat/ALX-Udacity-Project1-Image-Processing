@@ -5,3 +5,5 @@ spec
 .eslintignore
 .gitignore
 .prettierignore
+
+*.md
