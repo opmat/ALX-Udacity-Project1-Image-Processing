@@ -9,10 +9,6 @@ describe('file validity test suites', () => {
     const outputImageType = 'jpg';
     const wrongOutputImageType = 'svg';
 
-    it('checks if image file exists', () => {
-
-    });
-
     it('checks if input image type is valid', () => {
         const isValid = imagePP.isValidInputImageFormat(inputImageType);
         expect(isValid).toBeTruthy();
@@ -33,13 +29,27 @@ describe('file validity test suites', () => {
     });
 });
 
-describe('directory accessibility test suite', () => {
-
-    it('checks if input directory is accessible', () => {
-
+describe('file property test', () => {
+    it('checks if file size conversion is correct', () => {
+        expect(imagePP.convertSizes(3613944)).toBe('3.45MB');
+    });
+    
+    it('checks if processed image name is correctly generated using default filetype', () => {
+        expect(imagePP.imageNameFormatter('testImg', {})).toEqual('testImg.jpg');
+    });
+    
+    it('checks if processed image name will not generate with default filetype', () => {
+        expect(imagePP.imageNameFormatter('testImg', {format:'png'})).not.toEqual('testImg.jpg');
     });
 
-    it('checks if output directory is accessible and writable', () => {
+});
 
+describe('Image Retrieval test Suite', () => {
+    it('should retrieve more than 1 image file', () => {
+        expect(imagePP.getAllImagesSync(imagePP.rawFileDir).length).toBeGreaterThan(1);
     });
+
+    it('should not return any image for invalid directory', () => {
+        expect(imagePP.getAllImagesSync('./images/craft').length).toBeFalsy();
+    })
 })
