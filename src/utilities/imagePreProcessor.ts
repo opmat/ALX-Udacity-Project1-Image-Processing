@@ -1,5 +1,6 @@
 // import {promise as fs} from fs;
 import glob from 'glob';
+import path from 'path';
 
 const validInputImageFormat: string[] = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'];
 const validOutputImageFormat: string[] = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif', 'tiff'];
@@ -36,25 +37,62 @@ const imageNameFormatter = (imageName:string, options:ImageOptions):string => {
         if (opt === 'format') {
             extension = (options[opt] as unknown) as string;
         }
-    })
-    // (Object.keys(options) as Array<keyof ImageOptions>).forEach((option) => {
-    //     newName += imgOptionShortname[option]
-    // })
-    // options.forEach((option) => {
-    //     newName = imgOptionShortname[option]
-    //     console.log(`There are ${options[option]} ${option}`);
-    // });
+    });
     extension = extension == ''? '.jpg' : '.'+extension;
     return newName + extension;
 };
 
 
-const getImage = (sourceDir:string, imageName:string):string => {
+const getImage = (_sourceDir:string, _imageName:string):string => {
     return '';
 };
 
-const getAllImages = (searchDir:string, imageType:string='*'):string[] => {
-    return glob.sync(`${searchDir}/*.${imageType}`);;
+const getAllImagesSync = (searchDir:string, imageType:string='*'): object[] => {
+    var imgList:object[] = [];
+    var files:string[] = glob.sync(`${searchDir}/*.${imageType}`);
+    files.forEach(ifile => {
+        imgList.push({
+            name: path.parse(ifile).name, 
+            ext: path.extname(ifile).substring(1), 
+            dir: path.parse(ifile).dir + '/'
+        });
+        // console.log(imgList)
+    });
+
+    return imgList;
+}
+
+const getAllImages = async(searchDir:string, imageType:string='*'):Promise<object[]> => {
+    var imgList:object[] = [];
+
+    await glob(`${searchDir}/*.${imageType}`, (err, files) => {
+        if (err) {
+            console.log(err);
+        } else {            
+            files.forEach(ifile => {
+                imgList.push({
+                    name: path.parse(ifile).name, 
+                    ext:path.parse(ifile).ext, 
+                    dir: path.parse(ifile).dir + '/'
+                });
+                console.log(imgList)
+            })
+        }
+        return imgList;
+    });
+    return imgList;
+}
+
+const convertSizes = (size: number): string => {
+    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    if (size === 0) {
+        return 'n/a';
+    }
+    const i = Math.min(Math.floor(Math.log(size) / Math.log(1024)), units.length - 1);
+    if (i === 0) { 
+        return `${size}${units[i]}`;
+    }
+    return `${(size / (1024 ** i)).toFixed(2)}${units[i]}`;
 }
 
 
@@ -63,7 +101,9 @@ export default {
     isValidOutputImageFormat,
     getImage,
     getAllImages,
+    getAllImagesSync,
     imageNameFormatter,
+    convertSizes,
     rawFileDir,
     processedFileDir,
     thumbsFileDir,

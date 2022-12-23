@@ -8,20 +8,17 @@ const resizeImage = async (srcImage: string, destImage: string, sizeOptions: {he
         .toFile(destImage)
         .then(data => {
             // generated
-            // console.log(data);
             retValue = true;
             return retValue;
         })
         .catch(err => { 
-            // console.log('r2');
-            // console.log(err);
             retValue = false;
             return retValue;
         });
     return retValue;
 };
 
-
 export default {
-    resizeImage
+    resizeImage,
+    // genThumbnail
 }
