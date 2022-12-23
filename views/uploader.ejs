@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/header'); %>
+  </head>
+  <body class="container">
+    <header class="flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <%- include('partials/nav'); %>
+    </header>
+
+    <main style="min-height: 200px">
+      <div class="row" >
+        <h1>This is great</h1>
+
+        <div class="col-sm-6 col-lg-4 mb-4 ">
+            <form
+            id="form"
+            action="/upload"
+            method="post"
+            enctype="multipart/form-data"
+            >
+                <div class="mb-3">
+                    <label for="uploadImage" class="form-label">Select Image to Upload</label>
+                    <input class="form-control" id="uploadImage" type="file" accept="image/*" name="image" required />
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="name">Save File As... (without extension and no spaces) <em>leave blank to save with original name</em></label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    id="filename"
+                    name="filename"
+                    placeholder="Enter name for the file"
+                    
+                    />
+                </div>
+                 -->
+                <div class="mb-3 mx-auto">
+                    <input class="btn btn-success " type="submit" value="Upload" />
+                </div>
+            </form>
+        </div>
+      </div>
+    </main>
+
+    <footer><%- include('partials/footer'); %></footer>
+  </body>
+</html>

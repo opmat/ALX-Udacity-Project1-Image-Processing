@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/header'); %>
+  </head>
+  <body class="container">
+    <header class="flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <%- include('partials/nav'); %>
+    </header>
+
+    <main style="min-height: 200px">
+        <% if (status == 1) { %>
+            <h1>Upload Successful</h1>
+        <%} else { %>
+            <h1>Upload Error</h1>
+        <% } %>
+      <div class="row" >
+
+        <div class="col-sm-8 col-lg-6 mb-6 ">
+            
+                
+            <div class="mb-3 mx-auto">
+                <h4>Uploaded file details</h4>
+                <% if (status == 1) { %>
+                    <!-- <% Object.keys(fileParam).forEach(function(img) { %>
+                        <%= img %> :  <%= fileParam[img] %> <br />
+                    <% }); %> -->
+                    
+                    <div class="w-25  d-inline-block"><strong>Filename: </strong></div>                
+                    <div class="w-75 p-3 d-inline-block"><%= fileParam['filename'] %></div>
+
+                    <div class="w-25 d-inline-block"><strong>Mimetype: </strong> </div>                
+                    <div class="w-75 p-3 d-inline-block"><%= fileParam['mimetype'] %></div>
+
+                    <div class="w-25 d-inline-block"><strong>Filesize: </strong></div>                
+                    <div class="w-75 p-3 d-inline-block"><%= filesize %></div>
+                <%} else { %>
+                    <p><%= message %> </p>
+                <% } %>
+            </div>
+                
+        </div>
+      </div>
+    </main>
+
+    <footer><%- include('partials/footer'); %></footer>
+  </body>
+</html>
