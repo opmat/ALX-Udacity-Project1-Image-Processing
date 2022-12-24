@@ -51,7 +51,6 @@ The supported image formats for input are:
 
 ```text
   'jpg',
-  'jpeg',
   'png',
   'webp',
   'gif',
@@ -66,7 +65,6 @@ The supported image formats for input are:
 
 ```text
   'jpg',
-  'jpeg',
   'png',
   'webp',
   'gif',
@@ -86,7 +84,7 @@ This endpoint load any of the images existing on the server with any width and h
 
 #### 1.1 View Image - Request Parameter
 
-The request Parameter is copulsory
+The request Parameter is compulsory
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `imageName` | `string` | **Required**. The name of the image (without file extension) on disk to resize and load |
@@ -98,7 +96,7 @@ All request queries are optional and the endpoint will serve the original image 
 | :-------- | :------- | :------------------------- |
 | `width` | `integer` | **Optional**. The width of the new image requested, this will initiate resizing of the original image based on the provided width |
 | `height` | `integer` | **Optional**. The height of the new image requested, this will initiate resizing of the original image based on the provided height |
-| `format` | `string` | **Optional - Default: jpg**. The mimetype of the requested image. This is only essential when an image with a different mimetype other than `jpg` is requested. Supported formats are `'jpg', 'jpeg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'` |
+| `format` | `string` | **Optional - Default: jpg**. The mimetype of the requested image. This is only essential when an image with a different mimetype other than `jpg` is requested. Supported formats are `'jpg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'` |
 
 This endpoint can also be used in `img` tags on web pages as found below assuming `floral` is an image called `floral.jpg` on the server;
 
@@ -112,7 +110,7 @@ To load a resized `floral` image with width of 420px and height of 250px, you wi
   <img src='/view/floral?width=420&width=250' />
 ```
   
-### 2. Download Image Enpoint
+### 2. Download Image Endpoint
 
 This endpoint initiates a download of any of the images existing on the server with any width and height as provided in the API call. The endpoint resizes the image based on the height and width provided, saves the image to disk and initiates the download of the image anytime the image is requested with the same width and height.
 
@@ -122,7 +120,7 @@ This endpoint initiates a download of any of the images existing on the server w
 
 #### 2.1 Download Image - Request Parameter
 
-The request Parameter is copulsory
+The request Parameter is compulsory
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `imageName` | `string` | **Required**. The name of the image (without file extension) on disk to resize and download |
@@ -134,7 +132,7 @@ All request queries are optional and the endpoint will serve the original image 
 | :-------- | :------- | :------------------------- |
 | `width` | `integer` | **Optional**. The width of the new image requested, this will initiate resizing and download of the original image based on the provided width |
 | `height` | `integer` | **Optional**. The height of the new image requested, this will initiate resizing and download of the original image based on the provided height |
-| `format` | `string` | **Optional - Default: jpg**. The mimetype of the requested image. This is only essential when an image with a different mimetype other than `jpg` is requested. Supported formats are `'jpg', 'jpeg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'` |
+| `format` | `string` | **Optional - Default: jpg**. The mimetype of the requested image. This is only essential when an image with a different mimetype other than `jpg` is requested. Supported formats are `'jpg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'` |
 
 This endpoint can also be used in `a` tags on web pages as found below assuming `floral` is an image called `floral.jpg` on the server;
 
@@ -156,7 +154,24 @@ Initiates the upload of provided source image from a form whose `enctype="multip
   POST /upload
 ```
 
-### 4. Web View
+### 4. Image Format Conversion Endpoint
+
+This endpoint initiates a conversion of any of the images existing on the server to the provided format in the API call, saves the new image to disk and displays it.
+
+```http
+  GET /convertImage/${imageName}/${convertFrom}/${convertTo}
+```
+
+#### 4.1 Image Format Conversion - Request Parameters
+
+The request Parameters are compulsory
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `imageName` | `string` | **Required**. The name of the image (without file extension) on disk to convert |
+| `convertFrom` | `string` | **Required**. The mimetype of the image you want to. Note that the image must exist on the server. Supported formats are `'jpg', 'png', 'webp', 'gif', 'avif', 'tiff', 'svg'` |
+| `convertTo` | `string` | **Required**. The mimetype to convert the image to. Supported formats are `'jpg', 'png', 'webp', 'gif', 'avif', 'tiff'` |
+
+### 5. Web View
 
 A web view has also been provided for easy navigation and use of the API. This can be accessed by visiting the root of the API
 
