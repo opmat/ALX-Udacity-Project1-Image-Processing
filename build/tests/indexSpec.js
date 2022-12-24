@@ -37,4 +37,26 @@ describe('Test GET /view/:imageName', function () {
             return done();
         });
     });
+    it('converts jpg image to png responds with status 200 and png image file', (done) => {
+        (0, supertest_1.default)(index_1.default)
+            .get('/convertImage/fjord/jpg/png')
+            .expect('content-type', /png/)
+            .expect(200)
+            .end(function (err, res) {
+            if (err)
+                throw err;
+            return done();
+        });
+    });
+    it('responds with status 500 for invalid image file format', (done) => {
+        (0, supertest_1.default)(index_1.default)
+            .get('/convertImage/fjord/jpg/svg')
+            .expect('content-type', /text/)
+            .expect(500)
+            .end(function (err, res) {
+            if (err)
+                throw err;
+            return done();
+        });
+    });
 });

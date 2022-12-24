@@ -31,7 +31,25 @@ const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void
     });
     return retValue;
 });
+const convertImageFormat = (srcImage, destImage, newFormat) => __awaiter(void 0, void 0, void 0, function* () {
+    let retValue = false;
+    yield (0, sharp_1.default)(srcImage)
+        .toFormat(newFormat)
+        .toFile(destImage)
+        .then((data) => {
+        // generated
+        console.log(data);
+        retValue = true;
+        return retValue;
+    })
+        .catch((err) => {
+        console.log(err);
+        retValue = false;
+        return retValue;
+    });
+    return retValue;
+});
 exports.default = {
-    resizeImage
-    // genThumbnail
+    resizeImage,
+    convertImageFormat
 };

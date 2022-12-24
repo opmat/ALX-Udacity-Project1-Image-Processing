@@ -15,8 +15,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const imagePreProcessor_1 = __importDefault(require("../utilities/imagePreProcessor"));
 const imageProcessor_1 = __importDefault(require("../utilities/imageProcessor"));
+// Convert Image between allowed format
+const imageConvert = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const rawImageName = req.params.imageName + '.' + req.params.convertFrom;
+    const processedImageName = req.params.imageName + '.' + req.params.convertTo;
+    try {
+        if (fs_1.default.existsSync(imagePreProcessor_1.default.rawFileDir + processedImageName)) {
+            //file exists
+            res.locals.rawImageName = imagePreProcessor_1.default.rawFileDir + rawImageName;
+            res.locals.processedImageName =
+                imagePreProcessor_1.default.rawFileDir + processedImageName;
+        }
+        else {
+            //file does not exist. check if full image exist
+            // then convert and save image
+            if (fs_1.default.existsSync(imagePreProcessor_1.default.rawFileDir + rawImageName)) {
+                res.locals.rawImageName = imagePreProcessor_1.default.rawFileDir + rawImageName;
+                const success = imageProcessor_1.default.convertImageFormat(imagePreProcessor_1.default.rawFileDir + rawImageName, imagePreProcessor_1.default.rawFileDir + processedImageName, req.params.convertTo);
+                if (yield success) {
+                    res.locals.processedImageName =
+                        imagePreProcessor_1.default.rawFileDir + processedImageName;
+                }
+            }
+            else {
+                res.locals.rawImageName = null;
+                res.locals.processedImageName = null;
+            }
+        }
+    }
+    catch (err) {
+        console.error(err);
+    }
+    next();
+});
 // Resize image based on provided parameters
-const imageCache = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const ext = typeof req.query.format !== 'undefined' && req.query.format
         ? '.' + req.query.format
         : '.jpg';
@@ -77,4 +110,7 @@ const imageCache = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
     next();
 });
-exports.default = imageCache;
+exports.default = {
+    cacheImage,
+    imageConvert
+};

@@ -16,7 +16,7 @@ app.use(express_1.default.static('views'));
 app.get('/', (req, res) => {
     res.render('index', { pageTitle: 'Image Manipulator - Home' });
 });
-app.get('/view/:imageName', imageCache_1.default, (req, res) => {
+app.get('/view/:imageName', imageCache_1.default.cacheImage, (req, res) => {
     if (res.locals.processedImageName != null) {
         res
             .status(200)
@@ -24,12 +24,12 @@ app.get('/view/:imageName', imageCache_1.default, (req, res) => {
     }
     else {
         // res.status(400).send('Image Not Found');
-        res
-            .status(400)
-            .sendFile(imagePreProcessor_1.default.imageNotFound, { root: __dirname + '/../' });
+        res.status(400).sendFile(imagePreProcessor_1.default.imageNotFound, {
+            root: __dirname + '/../'
+        });
     }
 });
-app.get('/download/:imageName', imageCache_1.default, (req, res) => {
+app.get('/download/:imageName', imageCache_1.default.cacheImage, (req, res) => {
     res
         .status(200)
         .download(res.locals.processedImageName, path_1.default.basename(res.locals.processedImageName), (err) => {
@@ -59,11 +59,18 @@ app.get('/gallery', (req, res) => {
         });
     }
 });
-app.get('/convertTo/:imageToConvert/:newImageName/:newImageFormat', (req, res) => {
-    // let galleryList: string[] = imagePreProcessor.getAllImages(imagePreProcessor.rawFileDir)
-    // res.json(galleryList);
-    const cimage = req.params.image;
-    res.send(`Test Conversion ${cimage}`);
+app.get('/convertImage/:imageName/:convertFrom/:convertTo', imageCache_1.default.imageConvert, (req, res) => {
+    if (res.locals.processedImageName != null) {
+        res
+            .status(200)
+            .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
+    }
+    else {
+        res.status(500).send('An Unknown error occured');
+        // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
+        //   root: __dirname + '/../'
+        // });
+    }
 });
 app.post('/upload', (req, res) => {
     imageUploader_1.default.uploadSingleImage(req, res, function (err) {
