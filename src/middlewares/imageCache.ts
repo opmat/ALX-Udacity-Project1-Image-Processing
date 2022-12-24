@@ -3,6 +3,7 @@ import fs from 'fs';
 import imagePreProcessor from '../utilities/imagePreProcessor';
 import imageProcessor from '../utilities/imageProcessor';
 import { AvailableFormatInfo } from 'sharp';
+import logger from '../utilities/logger';
 
 // Convert Image between allowed format
 const imageConvert = async (
@@ -30,16 +31,32 @@ const imageConvert = async (
           req.params.convertTo as unknown as AvailableFormatInfo
         );
         if (await success) {
+          logger.info(
+            `imageConvert module in imageCache completed with ${JSON.stringify(
+              success
+            )}`
+          );
           res.locals.processedImageName =
             imagePreProcessor.rawFileDir + processedImageName;
+        } else {
+          logger.error(
+            `imageConvert module in imageCache failed with ${JSON.stringify(
+              success
+            )})`
+          );
         }
       } else {
+        logger.error(
+          `imageConvert module in imageCache failed with error: raw image not found`
+        );
         res.locals.rawImageName = null;
         res.locals.processedImageName = null;
       }
     }
   } catch (err) {
-    console.error(err);
+    logger.info(
+      `imageConvert module in imageCache completed with ${JSON.stringify(err)}`
+    );
   }
 
   next();
@@ -112,17 +129,27 @@ const cacheImage = async (req: Request, res: Response, next: NextFunction) => {
             );
           }
           if (await success) {
+            logger.info(
+              `cacheImage module completed with ${JSON.stringify(success)}`
+            );
             res.locals.processedImageName =
               imagePreProcessor.processedFileDir + processedImageName;
+          } else {
+            logger.info(
+              `cacheImage module failed with ${JSON.stringify(success)}`
+            );
           }
         }
       } else {
+        logger.error(
+          `cacheImage module failed with error: raw image not found`
+        );
         res.locals.rawImageName = null;
         res.locals.processedImageName = null;
       }
     }
   } catch (err) {
-    console.error(err);
+    logger.error(`cacheImage module failed with ${JSON.stringify(err)}`);
   }
 
   next();

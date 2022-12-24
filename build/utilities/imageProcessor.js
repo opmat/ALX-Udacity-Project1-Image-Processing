@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sharp_1 = __importDefault(require("sharp"));
+const logger_1 = __importDefault(require("./../utilities/logger"));
 const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void 0, void 0, function* () {
     let retValue = false;
     yield (0, sharp_1.default)(srcImage)
@@ -20,12 +21,12 @@ const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void
         .toFile(destImage)
         .then((data) => {
         // generated
-        console.log(data);
+        logger_1.default.info(`resizeImage module completed with ${JSON.stringify(data)}`);
         retValue = true;
         return retValue;
     })
         .catch((err) => {
-        console.log(err);
+        logger_1.default.error(`resizeImage module failed with ${JSON.stringify(err)}`);
         retValue = false;
         return retValue;
     });
@@ -38,12 +39,12 @@ const convertImageFormat = (srcImage, destImage, newFormat) => __awaiter(void 0,
         .toFile(destImage)
         .then((data) => {
         // generated
-        console.log(data);
+        logger_1.default.info(`convertImage module completed with ${JSON.stringify(data)}`);
         retValue = true;
         return retValue;
     })
         .catch((err) => {
-        console.log(err);
+        logger_1.default.error(`convertImage module completed with ${JSON.stringify(err)}`);
         retValue = false;
         return retValue;
     });

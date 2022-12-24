@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import logger from './../utilities/logger';
 
 const resizeImage = async (
   srcImage: string,
@@ -12,12 +13,12 @@ const resizeImage = async (
     .toFile(destImage)
     .then((data) => {
       // generated
-      console.log(data);
+      logger.info(`resizeImage module completed with ${JSON.stringify(data)}`);
       retValue = true;
       return retValue;
     })
     .catch((err) => {
-      console.log(err);
+      logger.error(`resizeImage module failed with ${JSON.stringify(err)}`);
       retValue = false;
       return retValue;
     });
@@ -36,12 +37,12 @@ const convertImageFormat = async (
     .toFile(destImage)
     .then((data) => {
       // generated
-      console.log(data);
+      logger.info(`convertImage module completed with ${JSON.stringify(data)}`);
       retValue = true;
       return retValue;
     })
     .catch((err) => {
-      console.log(err);
+      logger.error(`convertImage module completed with ${JSON.stringify(err)}`);
       retValue = false;
       return retValue;
     });

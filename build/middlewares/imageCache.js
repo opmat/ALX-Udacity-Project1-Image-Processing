@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const imagePreProcessor_1 = __importDefault(require("../utilities/imagePreProcessor"));
 const imageProcessor_1 = __importDefault(require("../utilities/imageProcessor"));
+const logger_1 = __importDefault(require("../utilities/logger"));
 // Convert Image between allowed format
 const imageConvert = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const rawImageName = req.params.imageName + '.' + req.params.convertFrom;
@@ -33,18 +34,23 @@ const imageConvert = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 res.locals.rawImageName = imagePreProcessor_1.default.rawFileDir + rawImageName;
                 const success = imageProcessor_1.default.convertImageFormat(imagePreProcessor_1.default.rawFileDir + rawImageName, imagePreProcessor_1.default.rawFileDir + processedImageName, req.params.convertTo);
                 if (yield success) {
+                    logger_1.default.info(`imageConvert module in imageCache completed with ${JSON.stringify(success)}`);
                     res.locals.processedImageName =
                         imagePreProcessor_1.default.rawFileDir + processedImageName;
                 }
+                else {
+                    logger_1.default.error(`imageConvert module in imageCache failed with ${JSON.stringify(success)})`);
+                }
             }
             else {
+                logger_1.default.error(`imageConvert module in imageCache failed with error: raw image not found`);
                 res.locals.rawImageName = null;
                 res.locals.processedImageName = null;
             }
         }
     }
     catch (err) {
-        console.error(err);
+        logger_1.default.info(`imageConvert module in imageCache completed with ${JSON.stringify(err)}`);
     }
     next();
 });
@@ -94,19 +100,24 @@ const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                         });
                     }
                     if (yield success) {
+                        logger_1.default.info(`cacheImage module completed with ${JSON.stringify(success)}`);
                         res.locals.processedImageName =
                             imagePreProcessor_1.default.processedFileDir + processedImageName;
+                    }
+                    else {
+                        logger_1.default.info(`cacheImage module failed with ${JSON.stringify(success)}`);
                     }
                 }
             }
             else {
+                logger_1.default.error(`cacheImage module failed with error: raw image not found`);
                 res.locals.rawImageName = null;
                 res.locals.processedImageName = null;
             }
         }
     }
     catch (err) {
-        console.error(err);
+        logger_1.default.error(`cacheImage module failed with ${JSON.stringify(err)}`);
     }
     next();
 });

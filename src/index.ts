@@ -3,6 +3,7 @@ import imagePreProcessor from './utilities/imagePreProcessor';
 import imageCache from './middlewares/imageCache';
 import imageUploader from './middlewares/imageUploader';
 import path from 'path';
+import logger from './utilities/logger';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,11 +21,20 @@ app.get(
   imageCache.cacheImage,
   (req: Request, res: Response) => {
     if (res.locals.processedImageName != null) {
+      logger.info(
+        `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
+          req.query
+        )} Image processed`
+      );
       res
         .status(200)
         .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     } else {
-      // res.status(400).send('Image Not Found');
+      logger.error(
+        `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
+          req.query
+        )} Image Not Found`
+      );
       res.status(400).sendFile(imagePreProcessor.imageNotFound, {
         root: __dirname + '/../'
       });
@@ -43,6 +53,11 @@ app.get(
         path.basename(res.locals.processedImageName),
         (err) => {
           if (err) {
+            logger.error(
+              `/download/:imageName - ${
+                req.params.imageName
+              } - ${JSON.stringify(req.query)} Image Not Found`
+            );
             res.status(500).send({
               message: 'Could not download the file. ' + err
             });
@@ -60,13 +75,18 @@ app.get('/gallery', (req: Request, res: Response) => {
   const galleryList: object[] = imagePreProcessor.getAllImagesSync(
     imagePreProcessor.rawFileDir
   );
-  // res.json(galleryList);
   if (galleryList.length > 0) {
+    logger.info(`/gallery - ${JSON.stringify(req.query)} loaded`);
     res.status(200).render('gallery', {
       pageTitle: 'Image Manipulator - Gallery',
       gallery: galleryList
     });
   } else {
+    logger.info(
+      `/gallery - ${JSON.stringify(
+        req.query
+      )} Image Gallery could not be loaded for request`
+    );
     res.status(400).render('gallery', {
       pageTitle: 'Image Manipulator - Gallery',
       gallery: []
@@ -79,14 +99,21 @@ app.get(
   imageCache.imageConvert,
   (req: Request, res: Response) => {
     if (res.locals.processedImageName != null) {
+      logger.info(
+        `/convertImage/:imageName/:convertFrom/:convertTo - ${JSON.stringify(
+          req.params
+        )} processed`
+      );
       res
         .status(200)
         .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     } else {
+      logger.error(
+        `/convertImage/:imageName/:convertFrom/:convertTo - ${JSON.stringify(
+          req.params
+        )} failed`
+      );
       res.status(500).send('An Unknown error occured');
-      // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
-      //   root: __dirname + '/../'
-      // });
     }
   }
 );
@@ -95,6 +122,9 @@ app.post('/upload', (req: Request, res: Response) => {
   imageUploader.uploadSingleImage(req, res, function (err) {
     // error occured during upload
     if (err) {
+      logger.error(
+        `/upload - ${req.query} failed to upload with message: ${err.message}`
+      );
       return res.status(500).render('uploadSuccess', {
         pageTitle: 'Image Manipulator - Upload Error',
         message: err.message,
@@ -103,6 +133,7 @@ app.post('/upload', (req: Request, res: Response) => {
     }
 
     // no error
+    logger.info(`/upload - ${req.query} completed`);
     //convert file size to readable format
     const filesize = imagePreProcessor.convertSizes(
       req.file?.size as unknown as number

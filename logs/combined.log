@@ -1,0 +1,107 @@
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with Error: Expected one of: heic, heif, avif, jpeg, jpg, jpe, tile, dz, png, raw, tiff, tif, webp, gif, jp2, jpx, j2k, j2c for format but received svg of type string"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"info","message":"/view/:imageName - fjord - [object Object] Image processed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] processed"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}

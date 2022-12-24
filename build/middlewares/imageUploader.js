@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
-// import express, { Request, Response }   from 'express';
 const imagePreProcessor_1 = __importDefault(require("../utilities/imagePreProcessor"));
+const logger_1 = __importDefault(require("../utilities/logger"));
 /**
  * Image upload Parts
  *
@@ -18,10 +18,6 @@ const imageStorage = multer_1.default.diskStorage({
     filename: (req, file, cb) => {
         const ext = path_1.default.extname(file.originalname).substring(1);
         let newFileName = path_1.default.parse(file.originalname).name;
-        // path.extname((req.query.filename as unknown) as string).substring(1);
-        // var newFileName: string =
-        //     (!(typeof passedFileName === 'undefined' || passedFileName === null || passedFileName === '')) ?
-        //         passedFileName : path.parse(file.originalname).name;
         newFileName = newFileName.replace(' ', '-') + `.${ext}`;
         cb(null, newFileName);
     }
@@ -32,6 +28,7 @@ const imageUploader = (0, multer_1.default)({
         const ext = path_1.default.extname(file.originalname).substring(1);
         if (!imagePreProcessor_1.default.isValidInputImageFormat(ext)) {
             // if file type is not a valid image format, return error
+            logger_1.default.error(`imageUploader module completed with invalid format error`);
             return cb(new Error('Invalid image file uploaded'));
         }
         cb(null, true);

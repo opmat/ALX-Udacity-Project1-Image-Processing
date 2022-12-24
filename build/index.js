@@ -8,6 +8,7 @@ const imagePreProcessor_1 = __importDefault(require("./utilities/imagePreProcess
 const imageCache_1 = __importDefault(require("./middlewares/imageCache"));
 const imageUploader_1 = __importDefault(require("./middlewares/imageUploader"));
 const path_1 = __importDefault(require("path"));
+const logger_1 = __importDefault(require("./utilities/logger"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 const serverUrl = 'http://localhost';
@@ -18,12 +19,13 @@ app.get('/', (req, res) => {
 });
 app.get('/view/:imageName', imageCache_1.default.cacheImage, (req, res) => {
     if (res.locals.processedImageName != null) {
+        logger_1.default.info(`/view/:imageName - ${req.params.imageName} - ${req.query} Image processed`);
         res
             .status(200)
             .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     }
     else {
-        // res.status(400).send('Image Not Found');
+        logger_1.default.error(`/view/:imageName - ${req.params.imageName} - ${req.query} Image Not Found`);
         res.status(400).sendFile(imagePreProcessor_1.default.imageNotFound, {
             root: __dirname + '/../'
         });
@@ -34,6 +36,7 @@ app.get('/download/:imageName', imageCache_1.default.cacheImage, (req, res) => {
         .status(200)
         .download(res.locals.processedImageName, path_1.default.basename(res.locals.processedImageName), (err) => {
         if (err) {
+            logger_1.default.error(`/download/:imageName - ${req.params.imageName} - ${req.query} Image Not Found`);
             res.status(500).send({
                 message: 'Could not download the file. ' + err
             });
@@ -45,14 +48,15 @@ app.get('/process', (req, res) => {
 });
 app.get('/gallery', (req, res) => {
     const galleryList = imagePreProcessor_1.default.getAllImagesSync(imagePreProcessor_1.default.rawFileDir);
-    // res.json(galleryList);
     if (galleryList.length > 0) {
+        logger_1.default.info(`/gallery - ${req.query} loaded`);
         res.status(200).render('gallery', {
             pageTitle: 'Image Manipulator - Gallery',
             gallery: galleryList
         });
     }
     else {
+        logger_1.default.info(`/gallery - ${req.query} Image Gallery could not be loaded for request`);
         res.status(400).render('gallery', {
             pageTitle: 'Image Manipulator - Gallery',
             gallery: []
@@ -61,15 +65,14 @@ app.get('/gallery', (req, res) => {
 });
 app.get('/convertImage/:imageName/:convertFrom/:convertTo', imageCache_1.default.imageConvert, (req, res) => {
     if (res.locals.processedImageName != null) {
+        logger_1.default.info(`/convertImage/:imageName/:convertFrom/:convertTo - ${req.params} processed`);
         res
             .status(200)
             .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     }
     else {
+        logger_1.default.error(`/convertImage/:imageName/:convertFrom/:convertTo - ${req.params} failed`);
         res.status(500).send('An Unknown error occured');
-        // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
-        //   root: __dirname + '/../'
-        // });
     }
 });
 app.post('/upload', (req, res) => {
@@ -77,6 +80,7 @@ app.post('/upload', (req, res) => {
         var _a;
         // error occured during upload
         if (err) {
+            logger_1.default.error(`/upload - ${req.query} failed to upload with message: ${err.message}`);
             return res.status(500).render('uploadSuccess', {
                 pageTitle: 'Image Manipulator - Upload Error',
                 message: err.message,
@@ -84,6 +88,7 @@ app.post('/upload', (req, res) => {
             });
         }
         // no error
+        logger_1.default.info(`/upload - ${req.query} completed`);
         //convert file size to readable format
         const filesize = imagePreProcessor_1.default.convertSizes((_a = req.file) === null || _a === void 0 ? void 0 : _a.size);
         res.status(200).render('uploadSuccess', {
