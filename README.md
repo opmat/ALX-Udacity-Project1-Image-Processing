@@ -11,7 +11,7 @@ This project is based on the ALX Udacity Fullstack JS Course.
 
 ## Installation
 
-Install the project with npm
+Clone or downlad the repository and you can then install the project with npm. You first `cd` into the repository directory
 
 ```bash
   cd project-directory
@@ -43,9 +43,40 @@ To run this project, you can choose to add environment variable for `PORT` to yo
 
 `PORT`
 
+## Supported Image Formats
+
+### Support Input Image Formats
+
+The supported image formats for input are:
+
+```text
+  'jpg',
+  'jpeg',
+  'png',
+  'webp',
+  'gif',
+  'avif',
+  'tiff',
+  'svg'
+```
+
+### Support Output Image Formats
+
+The supported image formats for input are:
+
+```text
+  'jpg',
+  'jpeg',
+  'png',
+  'webp',
+  'gif',
+  'avif',
+  'tiff'
+```
+
 ## API Reference
 
-### View Image
+### 1. View Image Endpoint
 
 This endpoint load any of the images existing on the server with any width and height as provided in the API call. The endpoint resizes the image based on the height and width provided, saves the image to disk and serves the image anytime the image is requested with the same width and height.
 
@@ -53,14 +84,14 @@ This endpoint load any of the images existing on the server with any width and h
   GET /view/${imageName}?width=${width}&height=${height}&format=${format}
 ```
 
-#### View Image - Request Parameter
+#### 1.1 View Image - Request Parameter
 
 The request Parameter is copulsory
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `imageName` | `string` | **Required**. The name of the image (without file extension) on disk to resize and load |
 
-#### View Image -Request Queries (_Optional_)
+#### 1.2 View Image -Request Queries (_Optional_)
 
 All request queries are optional and the endpoint will serve the original image if not query is provided
 | Parameter | Type     | Description                |
@@ -81,7 +112,7 @@ To load a resized `floral` image with width of 420px and height of 250px, you wi
   <img src='/view/floral?width=420&width=250' />
 ```
   
-### Download Image
+### 2. Download Image Enpoint
 
 This endpoint initiates a download of any of the images existing on the server with any width and height as provided in the API call. The endpoint resizes the image based on the height and width provided, saves the image to disk and initiates the download of the image anytime the image is requested with the same width and height.
 
@@ -89,14 +120,14 @@ This endpoint initiates a download of any of the images existing on the server w
   GET /download/${imageName}?width=${width}&height=${height}&format=${format}
 ```
 
-#### Download Image - Request Parameter
+#### 2.1 Download Image - Request Parameter
 
 The request Parameter is copulsory
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `imageName` | `string` | **Required**. The name of the image (without file extension) on disk to resize and download |
 
-#### Download Image - Request Queries (_Optional_)
+#### 2.2 Download Image - Request Queries (_Optional_)
 
 All request queries are optional and the endpoint will serve the original image if not query is provided
 | Parameter | Type     | Description                |
@@ -117,7 +148,7 @@ To download a resized `floral` image with width of 420px and height of 250px, yo
   <img src='/download/floral?width=420&width=250' />
 ```
 
-### Upload Image
+### 3. Upload Image
 
 Initiates the upload of provided source image from a form whose `enctype="multipart/form-data"` and the file field named `image`
 
@@ -125,7 +156,7 @@ Initiates the upload of provided source image from a form whose `enctype="multip
   POST /upload
 ```
 
-### Web View
+### 4. Web View
 
 A web view has also been provided for easy navigation and use of the API. This can be accessed by visiting the root of the API
 
@@ -135,6 +166,6 @@ A web view has also been provided for easy navigation and use of the API. This c
 
 ## Screenshots
 
-![App Screenshot](https://drive.google.com/file/d/1hoq3QK4bRkvbpESANHm0VYUDzDt1difJ/view?usp=share_link)
+![App Screenshot](https://ffesongl.sirv.com/ALX%20Udacity%20Projects/Project%201%20-%20Image%20Manipulator/localhost_3000_gallery.png)
 
-![App Screenshot 2](https://drive.google.com/file/d/10ZLcifaP4Vs60pI_xhh7xcYQnqS29r-x/view?usp=sharing)
+![App Screenshot 2](https://ffesongl.sirv.com/ALX%20Udacity%20Projects/Project%201%20-%20Image%20Manipulator/Screenshot%20(1070).png)
