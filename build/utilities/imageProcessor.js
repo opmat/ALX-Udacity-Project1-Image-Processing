@@ -14,19 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sharp_1 = __importDefault(require("sharp"));
 const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void 0, void 0, function* () {
-    var retValue = false;
+    let retValue = false;
     yield (0, sharp_1.default)(srcImage)
         .resize({ height: sizeOptions.height, width: sizeOptions.width })
         .toFile(destImage)
-        .then(data => {
+        .then((data) => {
         // generated
-        // console.log(data);
+        console.log(data);
         retValue = true;
         return retValue;
     })
-        .catch(err => {
-        // console.log('r2');
-        // console.log(err);
+        .catch((err) => {
+        console.log(err);
         retValue = false;
         return retValue;
     });
@@ -34,4 +33,5 @@ const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void
 });
 exports.default = {
     resizeImage
+    // genThumbnail
 };

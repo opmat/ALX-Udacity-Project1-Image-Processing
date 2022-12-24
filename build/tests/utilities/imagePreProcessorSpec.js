@@ -11,8 +11,6 @@ describe('file validity test suites', () => {
     const inputImageType = 'jpg';
     const outputImageType = 'jpg';
     const wrongOutputImageType = 'svg';
-    it('checks if image file exists', () => {
-    });
     it('checks if input image type is valid', () => {
         const isValid = imagePreProcessor_1.default.isValidInputImageFormat(inputImageType);
         expect(isValid).toBeTruthy();
@@ -25,12 +23,24 @@ describe('file validity test suites', () => {
         const isValid = imagePreProcessor_1.default.isValidOutputImageFormat(wrongOutputImageType);
         expect(isValid).toBeFalse();
     });
-    it('expects default image file name to be returned if file does not exist', () => {
+    it('expects default image file name to be returned if file does not exist', () => { });
+});
+describe('file property test', () => {
+    it('checks if file size conversion is correct', () => {
+        expect(imagePreProcessor_1.default.convertSizes(3613944)).toBe('3.45MB');
+    });
+    it('checks if processed image name is correctly generated using default filetype', () => {
+        expect(imagePreProcessor_1.default.imageNameFormatter('testImg', {})).toEqual('testImg.jpg');
+    });
+    it('checks if processed image name will not generate with default filetype', () => {
+        expect(imagePreProcessor_1.default.imageNameFormatter('testImg', { format: 'png' })).not.toEqual('testImg.jpg');
     });
 });
-describe('directory accessibility test suite', () => {
-    it('checks if input directory is accessible', () => {
+describe('Image Retrieval test Suite', () => {
+    it('should retrieve more than 1 image file', () => {
+        expect(imagePreProcessor_1.default.getAllImagesSync(imagePreProcessor_1.default.rawFileDir).length).toBeGreaterThan(1);
     });
-    it('checks if output directory is accessible and writable', () => {
+    it('should not return any image for invalid directory', () => {
+        expect(imagePreProcessor_1.default.getAllImagesSync('./images/craft').length).toBeFalsy();
     });
 });
