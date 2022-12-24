@@ -83,7 +83,7 @@ app.get(
         .status(200)
         .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     } else {
-      res.status(400).send('An Unknown error occured');
+      res.status(500).send('An Unknown error occured');
       // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
       //   root: __dirname + '/../'
       // });
