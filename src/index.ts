@@ -15,34 +15,42 @@ app.get('/', (req: Request, res: Response) => {
   res.render('index', { pageTitle: 'Image Manipulator - Home' });
 });
 
-app.get('/view/:imageName', imageCache, (req: Request, res: Response) => {
-  if (res.locals.processedImageName != null) {
+app.get(
+  '/view/:imageName',
+  imageCache.cacheImage,
+  (req: Request, res: Response) => {
+    if (res.locals.processedImageName != null) {
+      res
+        .status(200)
+        .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
+    } else {
+      // res.status(400).send('Image Not Found');
+      res.status(400).sendFile(imagePreProcessor.imageNotFound, {
+        root: __dirname + '/../'
+      });
+    }
+  }
+);
+
+app.get(
+  '/download/:imageName',
+  imageCache.cacheImage,
+  (req: Request, res: Response) => {
     res
       .status(200)
-      .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
-  } else {
-    // res.status(400).send('Image Not Found');
-    res
-      .status(400)
-      .sendFile(imagePreProcessor.imageNotFound, { root: __dirname + '/../' });
-  }
-});
-
-app.get('/download/:imageName', imageCache, (req: Request, res: Response) => {
-  res
-    .status(200)
-    .download(
-      res.locals.processedImageName,
-      path.basename(res.locals.processedImageName),
-      (err) => {
-        if (err) {
-          res.status(500).send({
-            message: 'Could not download the file. ' + err
-          });
+      .download(
+        res.locals.processedImageName,
+        path.basename(res.locals.processedImageName),
+        (err) => {
+          if (err) {
+            res.status(500).send({
+              message: 'Could not download the file. ' + err
+            });
+          }
         }
-      }
-    );
-});
+      );
+  }
+);
 
 app.get('/process', (req: Request, res: Response) => {
   res.send("I'm in");
@@ -67,12 +75,19 @@ app.get('/gallery', (req: Request, res: Response) => {
 });
 
 app.get(
-  '/convertTo/:imageToConvert/:newImageName/:newImageFormat',
+  '/convertImage/:imageName/:convertFrom/:convertTo',
+  imageCache.imageConvert,
   (req: Request, res: Response) => {
-    // let galleryList: string[] = imagePreProcessor.getAllImages(imagePreProcessor.rawFileDir)
-    // res.json(galleryList);
-    const cimage: string = req.params.image;
-    res.send(`Test Conversion ${cimage}`);
+    if (res.locals.processedImageName != null) {
+      res
+        .status(200)
+        .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
+    } else {
+      res.status(400).send('An Unknown error occured');
+      // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
+      //   root: __dirname + '/../'
+      // });
+    }
   }
 );
 

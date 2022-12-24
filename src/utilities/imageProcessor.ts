@@ -24,7 +24,31 @@ const resizeImage = async (
   return retValue;
 };
 
+const convertImageFormat = async (
+  srcImage: string,
+  destImage: string,
+  newFormat: sharp.AvailableFormatInfo
+): Promise<boolean> => {
+  let retValue = false;
+
+  await sharp(srcImage)
+    .toFormat(newFormat)
+    .toFile(destImage)
+    .then((data) => {
+      // generated
+      console.log(data);
+      retValue = true;
+      return retValue;
+    })
+    .catch((err) => {
+      console.log(err);
+      retValue = false;
+      return retValue;
+    });
+  return retValue;
+};
+
 export default {
-  resizeImage
-  // genThumbnail
+  resizeImage,
+  convertImageFormat
 };

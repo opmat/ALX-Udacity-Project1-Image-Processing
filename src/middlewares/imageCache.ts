@@ -2,9 +2,51 @@ import { Request, Response, NextFunction } from 'express';
 import fs from 'fs';
 import imagePreProcessor from '../utilities/imagePreProcessor';
 import imageProcessor from '../utilities/imageProcessor';
+import { AvailableFormatInfo } from 'sharp';
+
+// Convert Image between allowed format
+const imageConvert = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const rawImageName = req.params.imageName + '.' + req.params.convertFrom;
+  const processedImageName = req.params.imageName + '.' + req.params.convertTo;
+
+  try {
+    if (fs.existsSync(imagePreProcessor.rawFileDir + processedImageName)) {
+      //file exists
+      res.locals.rawImageName = imagePreProcessor.rawFileDir + rawImageName;
+      res.locals.processedImageName =
+        imagePreProcessor.rawFileDir + processedImageName;
+    } else {
+      //file does not exist. check if full image exist
+      // then convert and save image
+      if (fs.existsSync(imagePreProcessor.rawFileDir + rawImageName)) {
+        res.locals.rawImageName = imagePreProcessor.rawFileDir + rawImageName;
+        const success: Promise<boolean> = imageProcessor.convertImageFormat(
+          imagePreProcessor.rawFileDir + rawImageName,
+          imagePreProcessor.rawFileDir + processedImageName,
+          req.params.convertTo as unknown as AvailableFormatInfo
+        );
+        if (await success) {
+          res.locals.processedImageName =
+            imagePreProcessor.rawFileDir + processedImageName;
+        }
+      } else {
+        res.locals.rawImageName = null;
+        res.locals.processedImageName = null;
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  next();
+};
 
 // Resize image based on provided parameters
-const imageCache = async (req: Request, res: Response, next: NextFunction) => {
+const cacheImage = async (req: Request, res: Response, next: NextFunction) => {
   const ext =
     typeof req.query.format !== 'undefined' && req.query.format
       ? '.' + req.query.format
@@ -86,4 +128,7 @@ const imageCache = async (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default imageCache;
+export default {
+  cacheImage,
+  imageConvert
+};
