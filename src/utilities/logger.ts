@@ -18,9 +18,19 @@ const transport: DailyRotateFile = new DailyRotateFile({
   maxFiles: '14d'
 });
 
+// const myFormat = winston.format.printf(
+//   ({ level, message, label, timestamp }) => {
+//     return `${timestamp} [${label}] ${level}: ${message}`;
+//   }
+// );
+
 const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.json(),
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json() //,
+    // myFormat
+  ),
   transports: [
     new winston.transports.File({
       filename: './logs/error.log',

@@ -19,13 +19,13 @@ app.get('/', (req, res) => {
 });
 app.get('/view/:imageName', imageCache_1.default.cacheImage, (req, res) => {
     if (res.locals.processedImageName != null) {
-        logger_1.default.info(`/view/:imageName - ${req.params.imageName} - ${req.query} Image processed`);
+        logger_1.default.info(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image processed`);
         res
             .status(200)
             .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     }
     else {
-        logger_1.default.error(`/view/:imageName - ${req.params.imageName} - ${req.query} Image Not Found`);
+        logger_1.default.error(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image Not Found`);
         res.status(400).sendFile(imagePreProcessor_1.default.imageNotFound, {
             root: __dirname + '/../'
         });
@@ -36,7 +36,7 @@ app.get('/download/:imageName', imageCache_1.default.cacheImage, (req, res) => {
         .status(200)
         .download(res.locals.processedImageName, path_1.default.basename(res.locals.processedImageName), (err) => {
         if (err) {
-            logger_1.default.error(`/download/:imageName - ${req.params.imageName} - ${req.query} Image Not Found`);
+            logger_1.default.error(`/download/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image Not Found`);
             res.status(500).send({
                 message: 'Could not download the file. ' + err
             });
@@ -49,14 +49,14 @@ app.get('/process', (req, res) => {
 app.get('/gallery', (req, res) => {
     const galleryList = imagePreProcessor_1.default.getAllImagesSync(imagePreProcessor_1.default.rawFileDir);
     if (galleryList.length > 0) {
-        logger_1.default.info(`/gallery - ${req.query} loaded`);
+        logger_1.default.info(`/gallery - ${JSON.stringify(req.query)} loaded`);
         res.status(200).render('gallery', {
             pageTitle: 'Image Manipulator - Gallery',
             gallery: galleryList
         });
     }
     else {
-        logger_1.default.info(`/gallery - ${req.query} Image Gallery could not be loaded for request`);
+        logger_1.default.info(`/gallery - ${JSON.stringify(req.query)} Image Gallery could not be loaded for request`);
         res.status(400).render('gallery', {
             pageTitle: 'Image Manipulator - Gallery',
             gallery: []
@@ -65,13 +65,13 @@ app.get('/gallery', (req, res) => {
 });
 app.get('/convertImage/:imageName/:convertFrom/:convertTo', imageCache_1.default.imageConvert, (req, res) => {
     if (res.locals.processedImageName != null) {
-        logger_1.default.info(`/convertImage/:imageName/:convertFrom/:convertTo - ${req.params} processed`);
+        logger_1.default.info(`/convertImage/:imageName/:convertFrom/:convertTo - ${JSON.stringify(req.params)} processed`);
         res
             .status(200)
             .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     }
     else {
-        logger_1.default.error(`/convertImage/:imageName/:convertFrom/:convertTo - ${req.params} failed`);
+        logger_1.default.error(`/convertImage/:imageName/:convertFrom/:convertTo - ${JSON.stringify(req.params)} failed`);
         res.status(500).send('An Unknown error occured');
     }
 });

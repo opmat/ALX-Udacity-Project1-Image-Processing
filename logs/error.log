@@ -50,3 +50,24 @@
 {"level":"error","message":"cacheImage module failed with error: raw image not found"}
 {"level":"error","message":"/view/:imageName - goldcliff - [object Object] Image Not Found"}
 {"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - [object Object] failed"}
+{"level":"\u001b[31merror\u001b[39m","message":"cacheImage module failed with error: raw image not found"}
+{"level":"\u001b[31merror\u001b[39m","message":"/view/:imageName - goldcliff - {} Image Not Found"}
+{"level":"\u001b[31merror\u001b[39m","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found","timestamp":"2022-12-24T15:33:24.819Z"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found","timestamp":"2022-12-24T15:33:24.820Z"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:33:24.856Z"}
+2022-12-24T15:36:41.462Z [undefined] error: cacheImage module failed with error: raw image not found
+2022-12-24T15:36:41.462Z [undefined] error: /view/:imageName - goldcliff - {} Image Not Found
+2022-12-24T15:36:41.549Z [undefined] error: /convertImage/:imageName/:convertFrom/:convertTo - {"imageName":"fjord","convertFrom":"jpg","convertTo":"svg"} failed
+2022-12-24T15:37:19.879Z [undefined] error: cacheImage module failed with error: raw image not found
+2022-12-24T15:37:19.879Z [undefined] error: /view/:imageName - goldcliff - {} Image Not Found
+2022-12-24T15:37:19.915Z [undefined] error: /convertImage/:imageName/:convertFrom/:convertTo - {"imageName":"fjord","convertFrom":"jpg","convertTo":"svg"} failed
+{"level":"error","message":"cacheImage module failed with error: raw image not found","timestamp":"2022-12-24T15:41:02.369Z"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found","timestamp":"2022-12-24T15:41:02.370Z"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:41:02.406Z"}
