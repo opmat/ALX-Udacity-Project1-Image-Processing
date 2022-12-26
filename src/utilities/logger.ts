@@ -18,18 +18,17 @@ const transport: DailyRotateFile = new DailyRotateFile({
   maxFiles: '14d'
 });
 
-// const myFormat = winston.format.printf(
-//   ({ level, message, label, timestamp }) => {
-//     return `${timestamp} [${label}] ${level}: ${message}`;
-//   }
-// );
-
-const logger = winston.createLogger({
+const logger: winston.Logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json() //,
-    // myFormat
+    winston.format.timestamp({
+      format: () => {
+        return new Date().toLocaleString('en-GB', {
+          timeZone: 'Africa/Lagos'
+        });
+      }
+    }),
+    winston.format.json()
   ),
   transports: [
     new winston.transports.File({
