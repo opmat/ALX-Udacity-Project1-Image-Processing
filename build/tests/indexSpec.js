@@ -25,11 +25,10 @@ describe('Test GET /view/:imageName', function () {
             return done();
         });
     });
-    it('responds with status 400 and notfound image file', (done) => {
+    it('responds with status 400', (done) => {
         (0, supertest_1.default)(index_1.default)
             .get('/view/goldcliff')
             .send({})
-            .expect('content-type', /jpeg/)
             .expect(400)
             .end(function (err, res) {
             if (err)

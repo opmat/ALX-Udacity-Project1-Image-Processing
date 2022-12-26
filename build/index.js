@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.render('index', { pageTitle: 'Image Manipulator - Home' });
 });
 app.get('/view/:imageName', imageCache_1.default.cacheImage, (req, res) => {
-    if (res.locals.processedImageName != null && res.locals.error !== null) {
+    if (res.locals.processedImageName != null) {
         logger_1.default.info(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image processed`);
         res
             .status(200)
