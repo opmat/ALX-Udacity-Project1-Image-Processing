@@ -10,7 +10,7 @@ const imageConvert = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   const rawImageName = req.params.imageName + '.' + req.params.convertFrom;
   const processedImageName = req.params.imageName + '.' + req.params.convertTo;
 
@@ -63,7 +63,11 @@ const imageConvert = async (
 };
 
 // Resize image based on provided parameters
-const cacheImage = async (req: Request, res: Response, next: NextFunction) => {
+const cacheImage = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const ext =
     typeof req.query.format !== 'undefined' && req.query.format
       ? '.' + req.query.format

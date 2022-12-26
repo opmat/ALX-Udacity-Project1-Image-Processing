@@ -12,14 +12,14 @@ const serverUrl = 'http://localhost';
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response): void => {
   res.render('index', { pageTitle: 'Image Manipulator - Home' });
 });
 
 app.get(
   '/view/:imageName',
   imageCache.cacheImage,
-  (req: Request, res: Response) => {
+  (req: Request, res: Response): void => {
     if (res.locals.processedImageName != null) {
       logger.info(
         `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
@@ -45,7 +45,7 @@ app.get(
 app.get(
   '/download/:imageName',
   imageCache.cacheImage,
-  (req: Request, res: Response) => {
+  (req: Request, res: Response): void => {
     res
       .status(200)
       .download(
@@ -67,11 +67,11 @@ app.get(
   }
 );
 
-app.get('/process', (req: Request, res: Response) => {
+app.get('/process', (req: Request, res: Response): void => {
   res.send("I'm in");
 });
 
-app.get('/gallery', (req: Request, res: Response) => {
+app.get('/gallery', (req: Request, res: Response): void => {
   const galleryList: object[] = imagePreProcessor.getAllImagesSync(
     imagePreProcessor.rawFileDir
   );
@@ -97,7 +97,7 @@ app.get('/gallery', (req: Request, res: Response) => {
 app.get(
   '/convertImage/:imageName/:convertFrom/:convertTo',
   imageCache.imageConvert,
-  (req: Request, res: Response) => {
+  (req: Request, res: Response): void => {
     if (res.locals.processedImageName != null) {
       logger.info(
         `/convertImage/:imageName/:convertFrom/:convertTo - ${JSON.stringify(
@@ -118,14 +118,14 @@ app.get(
   }
 );
 
-app.post('/upload', (req: Request, res: Response) => {
-  imageUploader.uploadSingleImage(req, res, function (err) {
+app.post('/upload', (req: Request, res: Response): void => {
+  imageUploader.uploadSingleImage(req, res, (err) => {
     // error occured during upload
     if (err) {
       logger.error(
         `/upload - ${req.query} failed to upload with message: ${err.message}`
       );
-      return res.status(500).render('uploadSuccess', {
+      res.status(500).render('uploadSuccess', {
         pageTitle: 'Image Manipulator - Upload Error',
         message: err.message,
         status: 0
@@ -147,11 +147,11 @@ app.post('/upload', (req: Request, res: Response) => {
   });
 });
 
-app.get('/upload', (req: Request, res: Response) => {
+app.get('/upload', (req: Request, res: Response): void => {
   res.render('uploader', { pageTitle: 'Image Manipulator - Upload Image' });
 });
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   console.log(
     `Server Started on port ${port}. You can access via ${serverUrl}:${port}`
   );

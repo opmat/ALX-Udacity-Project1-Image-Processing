@@ -7,11 +7,11 @@ import logger from '../utilities/logger';
  * Image upload Parts
  *
  */
-const imageStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
+const imageStorage: multer.StorageEngine = multer.diskStorage({
+  destination: (_req, _file, cb) => {
     cb(null, './images/original');
   },
-  filename: (req, file, cb) => {
+  filename: (_req, file, cb) => {
     const ext: string = path.extname(file.originalname).substring(1);
     let newFileName: string = path.parse(file.originalname).name;
     newFileName = newFileName.replace(' ', '-') + `.${ext}`;
@@ -19,9 +19,9 @@ const imageStorage = multer.diskStorage({
   }
 });
 
-const imageUploader = multer({
+const imageUploader: multer.Multer = multer({
   storage: imageStorage,
-  fileFilter: (req, file, cb) => {
+  fileFilter: (_req, file, cb) => {
     const ext: string = path.extname(file.originalname).substring(1);
     if (!imagePreProcessor.isValidInputImageFormat(ext)) {
       // if file type is not a valid image format, return error

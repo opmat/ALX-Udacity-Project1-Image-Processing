@@ -1,4 +1,4 @@
-// import {promise as fs} from fs;
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import glob from 'glob';
 import path from 'path';
 
@@ -22,10 +22,10 @@ const validOutputImageFormat: string[] = [
   'tiff'
 ];
 
-const rawFileDir = './images/original/';
-const processedFileDir = './images/refined/';
-const thumbsFileDir = './images/thumbs/';
-const imageNotFound = './images/original/notfound.jpg';
+const rawFileDir: string = './images/original/';
+const processedFileDir: string = './images/refined/';
+const thumbsFileDir: string = './images/thumbs/';
+const imageNotFound: string = './images/original/notfound.jpg';
 
 interface ImageOptions {
   width?: number;
