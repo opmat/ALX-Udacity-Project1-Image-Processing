@@ -137,13 +137,13 @@ All request queries are optional and the endpoint will serve the original image 
 This endpoint can also be used in `a` tags on web pages as found below assuming `floral` is an image called `floral.jpg` on the server;
 
 ```html
-  <img src='/download/floral' />
+  <a href='/download/floral' />
 ```
 
 To download a resized `floral` image with width of 420px and height of 250px, you will have;
 
 ```html
-  <img src='/download/floral?width=420&width=250' />
+  <a href='/download/floral?width=420&width=250' />
 ```
 
 ### 3. Upload Image

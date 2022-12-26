@@ -151,3 +151,21 @@
 {"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"png\"} processed","timestamp":"2022-12-24T15:41:02.380Z"}
 {"level":"info","message":"imageConvert module in imageCache completed with {}","timestamp":"2022-12-24T15:41:02.406Z"}
 {"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:41:02.406Z"}
+{"level":"info","message":"/view/:imageName - fjord - {} Image processed","timestamp":"2022-12-24T15:44:30.253Z"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found","timestamp":"2022-12-24T15:44:30.285Z"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found","timestamp":"2022-12-24T15:44:30.286Z"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"png\"} processed","timestamp":"2022-12-24T15:44:30.298Z"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}","timestamp":"2022-12-24T15:44:30.337Z"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:44:30.338Z"}
+{"level":"info","message":"/view/:imageName - fjord - {} Image processed","timestamp":"2022-12-24T15:45:22.944Z"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found","timestamp":"2022-12-24T15:45:23.007Z"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found","timestamp":"2022-12-24T15:45:23.007Z"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"png\"} processed","timestamp":"2022-12-24T15:45:23.024Z"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}","timestamp":"2022-12-24T15:45:23.337Z"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:45:23.337Z"}
+{"level":"info","message":"/view/:imageName - fjord - {} Image processed","timestamp":"2022-12-24T15:45:46.274Z"}
+{"level":"error","message":"cacheImage module failed with error: raw image not found","timestamp":"2022-12-24T15:45:46.302Z"}
+{"level":"error","message":"/view/:imageName - goldcliff - {} Image Not Found","timestamp":"2022-12-24T15:45:46.302Z"}
+{"level":"info","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"png\"} processed","timestamp":"2022-12-24T15:45:46.539Z"}
+{"level":"info","message":"imageConvert module in imageCache completed with {}","timestamp":"2022-12-24T15:45:46.575Z"}
+{"level":"error","message":"/convertImage/:imageName/:convertFrom/:convertTo - {\"imageName\":\"fjord\",\"convertFrom\":\"jpg\",\"convertTo\":\"svg\"} failed","timestamp":"2022-12-24T15:45:46.576Z"}
