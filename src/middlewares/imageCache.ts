@@ -77,6 +77,7 @@ const cacheImage = async (
     req.params.imageName,
     req.query
   );
+  res.locals.error = null;
   try {
     if (
       fs.existsSync(imagePreProcessor.processedFileDir + processedImageName)
@@ -98,6 +99,17 @@ const cacheImage = async (
           (typeof req.query.width === 'undefined' || req.query.width === null)
         ) {
           res.locals.processedImageName = res.locals.rawImageName;
+        } else if (
+          !imagePreProcessor.isValidDimension(req.query.width) ||
+          !imagePreProcessor.isValidDimension(req.query.height)
+        ) {
+          logger.error(
+            `cacheImage module failed with error: invalid height and/or width, must be positive number`
+          );
+          res.locals.error =
+            'invalid height and/or width, must be positive number';
+          res.locals.rawImageName = null;
+          res.locals.processedImageName = null;
         } else {
           //generate resized image from raw image
           let success: Promise<boolean>;
@@ -139,6 +151,9 @@ const cacheImage = async (
             res.locals.processedImageName =
               imagePreProcessor.processedFileDir + processedImageName;
           } else {
+            res.locals.error = `Image Resizing Failed with ${JSON.stringify(
+              success
+            )}`;
             logger.info(
               `cacheImage module failed with ${JSON.stringify(success)}`
             );
@@ -148,11 +163,13 @@ const cacheImage = async (
         logger.error(
           `cacheImage module failed with error: raw image not found`
         );
+        res.locals.error = 'Raw Image not found';
         res.locals.rawImageName = null;
         res.locals.processedImageName = null;
       }
     }
   } catch (err) {
+    res.locals.error = `An Error Occured. Error: ${JSON.stringify(err)}`;
     logger.error(`cacheImage module failed with ${JSON.stringify(err)}`);
   }
 

@@ -20,7 +20,7 @@ app.get(
   '/view/:imageName',
   imageCache.cacheImage,
   (req: Request, res: Response): void => {
-    if (res.locals.processedImageName != null) {
+    if (res.locals.processedImageName != null && res.locals.error !== null) {
       logger.info(
         `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
           req.query
@@ -33,11 +33,12 @@ app.get(
       logger.error(
         `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
           req.query
-        )} Image Not Found`
+        )} ${res.locals.error}`
       );
-      res.status(400).sendFile(imagePreProcessor.imageNotFound, {
-        root: __dirname + '/../'
-      });
+      res.status(400).send(res.locals.error);
+      // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
+      //   root: __dirname + '/../'
+      // });
     }
   }
 );

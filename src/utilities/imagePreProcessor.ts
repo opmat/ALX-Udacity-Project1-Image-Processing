@@ -116,9 +116,22 @@ const convertSizes = (size: number): string => {
   return `${(size / 1024 ** i).toFixed(2)}${units[i]}`;
 };
 
+const isValidDimension = (dim: number | string | unknown): boolean => {
+  if (typeof dim !== 'string') {
+    return false;
+  }
+
+  if (dim.trim() === '') {
+    return false;
+  }
+
+  return !Number.isNaN(Number(dim)) && (dim as unknown as number) > 0;
+};
+
 export default {
   isValidInputImageFormat,
   isValidOutputImageFormat,
+  isValidDimension,
   getAllImages,
   getAllImagesSync,
   imageNameFormatter,
