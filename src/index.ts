@@ -20,7 +20,7 @@ app.get(
   '/view/:imageName',
   imageCache.cacheImage,
   (req: Request, res: Response): void => {
-    if (res.locals.processedImageName != null && res.locals.error !== null) {
+    if (res.locals.processedImageName != null) {
       logger.info(
         `/view/:imageName - ${req.params.imageName} - ${JSON.stringify(
           req.query
