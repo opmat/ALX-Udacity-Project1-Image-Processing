@@ -23,11 +23,10 @@ describe('Test GET /view/:imageName', function () {
       });
   });
 
-  it('responds with status 400 and notfound image file', (done) => {
+  it('responds with status 400', (done) => {
     supertest(app)
       .get('/view/goldcliff')
       .send({})
-      .expect('content-type', /jpeg/)
       .expect(400)
       .end(function (err, res) {
         if (err) throw err;
