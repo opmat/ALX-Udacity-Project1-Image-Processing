@@ -16,39 +16,53 @@ const sharp_1 = __importDefault(require("sharp"));
 const logger_1 = __importDefault(require("./../utilities/logger"));
 const resizeImage = (srcImage, destImage, sizeOptions) => __awaiter(void 0, void 0, void 0, function* () {
     let retValue = false;
-    yield (0, sharp_1.default)(srcImage)
-        .resize({ height: sizeOptions.height, width: sizeOptions.width })
-        .toFile(destImage)
-        .then((data) => {
-        // generated
-        logger_1.default.info(`resizeImage module completed with ${JSON.stringify(data)}`);
-        retValue = true;
-        return retValue;
-    })
-        .catch((err) => {
-        logger_1.default.error(`resizeImage module failed with ${JSON.stringify(err)}`);
+    try {
+        yield (0, sharp_1.default)(srcImage)
+            .resize({ height: sizeOptions.height, width: sizeOptions.width })
+            .toFile(destImage)
+            .then((data) => {
+            // generated
+            logger_1.default.info(`resizeImage module completed with ${JSON.stringify(data)}`);
+            retValue = true;
+            return retValue;
+        })
+            .catch((err) => {
+            logger_1.default.error(`resizeImage module failed with ${JSON.stringify(err)}`);
+            retValue = false;
+            return retValue;
+        });
+    }
+    catch (err) {
+        logger_1.default.error(`resizeImage module threw error with ${JSON.stringify(err)}`);
         retValue = false;
         return retValue;
-    });
+    }
     return retValue;
 });
 const convertImageFormat = (srcImage, destImage, newFormat) => __awaiter(void 0, void 0, void 0, function* () {
     let retValue = false;
-    yield (0, sharp_1.default)(srcImage)
-        .toFormat(newFormat)
-        .toFile(destImage)
-        .then((data) => {
-        // generated
-        logger_1.default.info(`convertImage module completed with ${JSON.stringify(data)}`);
-        retValue = true;
+    try {
+        yield (0, sharp_1.default)(srcImage)
+            .toFormat(newFormat)
+            .toFile(destImage)
+            .then((data) => {
+            // generated
+            logger_1.default.info(`convertImage module completed with ${JSON.stringify(data)}`);
+            retValue = true;
+            return retValue;
+        })
+            .catch((err) => {
+            logger_1.default.error(`convertImage module failed with ${JSON.stringify(err)}`);
+            retValue = false;
+            return retValue;
+        });
         return retValue;
-    })
-        .catch((err) => {
-        logger_1.default.error(`convertImage module completed with ${JSON.stringify(err)}`);
+    }
+    catch (err) {
+        logger_1.default.error(`convertImage module threw error ${JSON.stringify(err)}`);
         retValue = false;
         return retValue;
-    });
-    return retValue;
+    }
 });
 exports.default = {
     resizeImage,

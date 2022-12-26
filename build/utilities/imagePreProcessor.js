@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import {promise as fs} from fs;
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 const glob_1 = __importDefault(require("glob"));
 const path_1 = __importDefault(require("path"));
 const validInputImageFormat = [
@@ -105,9 +105,19 @@ const convertSizes = (size) => {
     }
     return `${(size / 1024 ** i).toFixed(2)}${units[i]}`;
 };
+const isValidDimension = (dim) => {
+    if (typeof dim !== 'string') {
+        return false;
+    }
+    if (dim.trim() === '') {
+        return false;
+    }
+    return !Number.isNaN(Number(dim)) && dim > 0;
+};
 exports.default = {
     isValidInputImageFormat,
     isValidOutputImageFormat,
+    isValidDimension,
     getAllImages,
     getAllImagesSync,
     imageNameFormatter,

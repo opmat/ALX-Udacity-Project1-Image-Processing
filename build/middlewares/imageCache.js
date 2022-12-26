@@ -61,6 +61,7 @@ const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         : '.jpg';
     const rawImageName = req.params.imageName + ext;
     const processedImageName = imagePreProcessor_1.default.imageNameFormatter(req.params.imageName, req.query);
+    res.locals.error = null;
     try {
         if (fs_1.default.existsSync(imagePreProcessor_1.default.processedFileDir + processedImageName)) {
             //file exists
@@ -78,6 +79,14 @@ const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     req.query.height === null) &&
                     (typeof req.query.width === 'undefined' || req.query.width === null)) {
                     res.locals.processedImageName = res.locals.rawImageName;
+                }
+                else if (!imagePreProcessor_1.default.isValidDimension(req.query.width) ||
+                    !imagePreProcessor_1.default.isValidDimension(req.query.height)) {
+                    logger_1.default.error(`cacheImage module failed with error: invalid height and/or width, must be positive number`);
+                    res.locals.error =
+                        'invalid height and/or width, must be positive number';
+                    res.locals.rawImageName = null;
+                    res.locals.processedImageName = null;
                 }
                 else {
                     //generate resized image from raw image
@@ -105,18 +114,21 @@ const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                             imagePreProcessor_1.default.processedFileDir + processedImageName;
                     }
                     else {
+                        res.locals.error = `Image Resizing Failed with ${JSON.stringify(success)}`;
                         logger_1.default.info(`cacheImage module failed with ${JSON.stringify(success)}`);
                     }
                 }
             }
             else {
                 logger_1.default.error(`cacheImage module failed with error: raw image not found`);
+                res.locals.error = 'Raw Image not found';
                 res.locals.rawImageName = null;
                 res.locals.processedImageName = null;
             }
         }
     }
     catch (err) {
+        res.locals.error = `An Error Occured. Error: ${JSON.stringify(err)}`;
         logger_1.default.error(`cacheImage module failed with ${JSON.stringify(err)}`);
     }
     next();

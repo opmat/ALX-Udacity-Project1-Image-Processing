@@ -18,17 +18,18 @@ app.get('/', (req, res) => {
     res.render('index', { pageTitle: 'Image Manipulator - Home' });
 });
 app.get('/view/:imageName', imageCache_1.default.cacheImage, (req, res) => {
-    if (res.locals.processedImageName != null) {
+    if (res.locals.processedImageName != null && res.locals.error !== null) {
         logger_1.default.info(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image processed`);
         res
             .status(200)
             .sendFile(res.locals.processedImageName, { root: __dirname + '/../' });
     }
     else {
-        logger_1.default.error(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} Image Not Found`);
-        res.status(400).sendFile(imagePreProcessor_1.default.imageNotFound, {
-            root: __dirname + '/../'
-        });
+        logger_1.default.error(`/view/:imageName - ${req.params.imageName} - ${JSON.stringify(req.query)} ${res.locals.error}`);
+        res.status(400).send(res.locals.error);
+        // res.status(400).sendFile(imagePreProcessor.imageNotFound, {
+        //   root: __dirname + '/../'
+        // });
     }
 });
 app.get('/download/:imageName', imageCache_1.default.cacheImage, (req, res) => {
@@ -76,12 +77,12 @@ app.get('/convertImage/:imageName/:convertFrom/:convertTo', imageCache_1.default
     }
 });
 app.post('/upload', (req, res) => {
-    imageUploader_1.default.uploadSingleImage(req, res, function (err) {
+    imageUploader_1.default.uploadSingleImage(req, res, (err) => {
         var _a;
         // error occured during upload
         if (err) {
             logger_1.default.error(`/upload - ${req.query} failed to upload with message: ${err.message}`);
-            return res.status(500).render('uploadSuccess', {
+            res.status(500).render('uploadSuccess', {
                 pageTitle: 'Image Manipulator - Upload Error',
                 message: err.message,
                 status: 0

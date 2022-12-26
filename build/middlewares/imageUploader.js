@@ -12,10 +12,10 @@ const logger_1 = __importDefault(require("../utilities/logger"));
  *
  */
 const imageStorage = multer_1.default.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (_req, _file, cb) => {
         cb(null, './images/original');
     },
-    filename: (req, file, cb) => {
+    filename: (_req, file, cb) => {
         const ext = path_1.default.extname(file.originalname).substring(1);
         let newFileName = path_1.default.parse(file.originalname).name;
         newFileName = newFileName.replace(' ', '-') + `.${ext}`;
@@ -24,7 +24,7 @@ const imageStorage = multer_1.default.diskStorage({
 });
 const imageUploader = (0, multer_1.default)({
     storage: imageStorage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (_req, file, cb) => {
         const ext = path_1.default.extname(file.originalname).substring(1);
         if (!imagePreProcessor_1.default.isValidInputImageFormat(ext)) {
             // if file type is not a valid image format, return error

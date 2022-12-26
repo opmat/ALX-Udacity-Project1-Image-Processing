@@ -44,16 +44,15 @@ const transport = new winston_daily_rotate_file_1.default({
     maxSize: '10m',
     maxFiles: '14d'
 });
-// const myFormat = winston.format.printf(
-//   ({ level, message, label, timestamp }) => {
-//     return `${timestamp} [${label}] ${level}: ${message}`;
-//   }
-// );
 const logger = winston.createLogger({
     level: 'info',
-    format: winston.format.combine(winston.format.timestamp(), winston.format.json() //,
-    // myFormat
-    ),
+    format: winston.format.combine(winston.format.timestamp({
+        format: () => {
+            return new Date().toLocaleString('en-GB', {
+                timeZone: 'Africa/Lagos'
+            });
+        }
+    }), winston.format.json()),
     transports: [
         new winston.transports.File({
             filename: './logs/error.log',
