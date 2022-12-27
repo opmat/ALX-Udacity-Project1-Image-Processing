@@ -100,14 +100,17 @@ const cacheImage = async (
         ) {
           res.locals.processedImageName = res.locals.rawImageName;
         } else if (
-          !imagePreProcessor.isValidDimension(req.query.width) ||
-          !imagePreProcessor.isValidDimension(req.query.height)
+          (typeof req.query.width !== 'undefined' &&
+            req.query.width !== null &&
+            !imagePreProcessor.isValidDimension(req.query.width)) ||
+          (typeof req.query.height !== 'undefined' &&
+            req.query.height !== null &&
+            !imagePreProcessor.isValidDimension(req.query.height))
         ) {
           logger.error(
             `cacheImage module failed with error: invalid height and/or width, must be positive number`
           );
-          res.locals.error =
-            'invalid height and/or width, must be positive number';
+          res.locals.error = `invalid height and/or width, must be positive number w${req.query.width} & h${req.query.height}`;
           res.locals.rawImageName = null;
           res.locals.processedImageName = null;
         } else {
