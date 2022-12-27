@@ -80,11 +80,14 @@ const cacheImage = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     (typeof req.query.width === 'undefined' || req.query.width === null)) {
                     res.locals.processedImageName = res.locals.rawImageName;
                 }
-                else if (!imagePreProcessor_1.default.isValidDimension(req.query.width) ||
-                    !imagePreProcessor_1.default.isValidDimension(req.query.height)) {
+                else if ((typeof req.query.width !== 'undefined' &&
+                    req.query.width !== null &&
+                    !imagePreProcessor_1.default.isValidDimension(req.query.width)) ||
+                    (typeof req.query.height !== 'undefined' &&
+                        req.query.height !== null &&
+                        !imagePreProcessor_1.default.isValidDimension(req.query.height))) {
                     logger_1.default.error(`cacheImage module failed with error: invalid height and/or width, must be positive number`);
-                    res.locals.error =
-                        'invalid height and/or width, must be positive number';
+                    res.locals.error = `invalid height and/or width, must be positive number w${req.query.width} & h${req.query.height}`;
                     res.locals.rawImageName = null;
                     res.locals.processedImageName = null;
                 }
